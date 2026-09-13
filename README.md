@@ -12,39 +12,6 @@ The current implementation provides a complete prototype pipeline with a Python 
 
 ---
 
-## Research Concept
-
-The core idea is to combine two complementary sources of information:
-
-```text
-        Physical Activity
-               │
-               ▼
-      Activity Recognition
-               │
-               │
-               ├──────────────┐
-               │              │
-               ▼              ▼
-          Brain Signal    Physical State
-               │              │
-               ▼              │
-        Signal Processing     │
-               │              │
-               ▼              │
-         Brain Features       │
-               │              │
-               └──────┬───────┘
-                      ▼
-              Multimodal Fusion
-                      │
-                      ▼
-              Human State Estimate
-                      │
-                      ▼
-             Adaptive Response
-````
-
 The long-term research direction is to investigate whether multimodal information can provide a more informative representation of human state than any single modality alone.
 
 ---
