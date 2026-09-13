@@ -137,88 +137,6 @@ The Unity layer is intended to provide a more immersive visualization of the est
 
 ---
 
-## System Architecture
-
-```text
-┌───────────────────────────────┐
-│        Signal Sources         │
-│                               │
-│  Physical Activity + Brain    │
-│          Signals              │
-└───────────────┬───────────────┘
-                │
-                ▼
-┌───────────────────────────────┐
-│       Signal Processing       │
-│                               │
-│ Filtering / Feature Extraction│
-└───────────────┬───────────────┘
-                │
-                ▼
-┌───────────────────────────────┐
-│       State Estimation        │
-│                               │
-│ Brain State + Activity State  │
-└───────────────┬───────────────┘
-                │
-                ▼
-┌───────────────────────────────┐
-│       Multimodal Fusion       │
-└───────────────┬───────────────┘
-                │
-                ▼
-┌───────────────────────────────┐
-│      Adaptive Intelligence    │
-│                               │
-│ Context-aware response logic  │
-└───────────────┬───────────────┘
-                │
-                ▼
-┌───────────────────────────────┐
-│       User Interface          │
-│                               │
-│ Monitoring Dashboard / Unity  │
-└───────────────────────────────┘
-```
-
----
-
-## Project Structure
-
-```text
-NeuroAdaptiveSmartActivity_Full/
-│
-├── Backend/
-│   ├── app/
-│   │   ├── models/
-│   │   │   └── schemas.py
-│   │   │
-│   │   ├── signal_processing/
-│   │   │   ├── filters.py
-│   │   │   ├── generator.py
-│   │   │   └── __init__.py
-│   │   │
-│   │   ├── static/
-│   │   │   └── monitor.html
-│   │   │
-│   │   ├── main.py
-│   │   └── __init__.py
-│   │
-│   ├── build/
-│   ├── dist/
-│   ├── requirements.txt
-│   ├── run_backend.py
-│   └── build_backend_exe.bat
-│
-├── Unity/
-│   └── Unity project files
-│
-├── README.md
-└── .gitignore
-```
-
----
-
 ## Technology Stack
 
 ### Backend
@@ -474,6 +392,14 @@ This direction is relevant to research in:
 * Human-AI interaction
 
 ---
+
+## Result
+<img width="1917" height="1195" alt="Screenshot 2026-09-14 011354" src="https://github.com/user-attachments/assets/34ed9c29-a616-4828-bf2e-27a9612e473a" />
+<img width="1917" height="1198" alt="Screenshot 2026-09-14 011402" src="https://github.com/user-attachments/assets/168cbfca-77cc-48b6-aea2-150f68796752" />
+<img width="1916" height="1198" alt="Screenshot 2026-09-14 011458" src="https://github.com/user-attachments/assets/204bf6ee-c973-4ddf-8977-7faf14e50026" />
+<img width="1916" height="1193" alt="Screenshot 2026-09-14 011408" src="https://github.com/user-attachments/assets/47ff4c03-9605-44d2-9e1c-1f3ae1397f17" />
+
+
 
 ## Disclaimer
 
