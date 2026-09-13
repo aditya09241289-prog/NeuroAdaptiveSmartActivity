@@ -1,0 +1,5 @@
+Final standalone backend location:
+
+Assets/StreamingAssets/Backend/NeuroAdaptiveBackend.exe
+
+The Unity standalone application will look for the backend here.

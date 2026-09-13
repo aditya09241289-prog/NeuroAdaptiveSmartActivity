@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Neuro-Adaptive Research Monitor</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #0b1020;
+            color: #e8edf7;
+        }
+
+        header {
+            padding: 24px 40px;
+            background: #11182b;
+            border-bottom: 1px solid #27324d;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 24px;
+            letter-spacing: 2px;
+        }
+
+        .status {
+            color: #62e6a8;
+            font-weight: bold;
+        }
+
+        .container {
+            padding: 30px;
+            max-width: 1400px;
+            margin: auto;
+        }
+
+        .grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(300px, 1fr));
+
+            gap: 20px;
+        }
+
+        .card {
+            background: #121a2e;
+
+            border: 1px solid #283653;
+
+            border-radius: 12px;
+
+            padding: 22px;
+
+            box-shadow:
+                0 8px 30px rgba(0,0,0,0.25);
+        }
+
+        .card h2 {
+            margin-top: 0;
+
+            font-size: 15px;
+
+            letter-spacing: 1.5px;
+
+            color: #8fa6cf;
+        }
+
+        .metric {
+            display: flex;
+
+            justify-content: space-between;
+
+            padding: 9px 0;
+
+            border-bottom:
+                1px solid #202a42;
+        }
+
+        .metric:last-child {
+            border-bottom: none;
+        }
+
+        .metric-value {
+            font-weight: bold;
+        }
+
+        .state-card {
+
+            margin-top: 20px;
+
+            text-align: center;
+
+            padding: 30px;
+
+            background: #121a2e;
+
+            border:
+                1px solid #283653;
+
+            border-radius: 12px;
+        }
+
+        .state {
+
+            font-size: 32px;
+
+            font-weight: bold;
+
+            margin: 15px;
+
+            color: #63d7ff;
+        }
+
+        .confidence {
+
+            font-size: 18px;
+
+            color: #9fb1d1;
+        }
+
+        .coaching {
+
+            margin-top: 15px;
+
+            font-size: 17px;
+        }
+
+        ul {
+
+            padding-left: 20px;
+
+            text-align: left;
+
+            max-width: 700px;
+
+            margin:
+                20px auto 0 auto;
+        }
+
+        .scenario {
+
+            color: #ffc76a;
+
+            font-weight: bold;
+        }
+
+        canvas {
+
+            width: 100%;
+
+            height: 180px;
+
+            margin-top: 10px;
+
+            background: #0b1020;
+
+            border-radius: 8px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<header>
+
+    <h1>NEURO-ADAPTIVE RESEARCH MONITOR</h1>
+
+    <div>
+        Backend:
+        <span
+            id="backendStatus"
+            class="status">
+            ● CONNECTING
+        </span>
+    </div>
+
+</header>
+
+
+<div class="container">
+
+
+    <div class="grid">
+
+
+        <!-- EEG -->
+
+        <div class="card">
+
+            <h2>LIVE EEG SIGNAL</h2>
+
+            <canvas
+                id="waveform">
+            </canvas>
+
+            <div class="metric">
+
+                <span>Sampling Rate</span>
+
+                <span
+                    class="metric-value"
+                    id="samplingRate">
+                    -
+                </span>
+
+            </div>
+
+
+            <div class="metric">
+
+                <span>Signal Quality</span>
+
+                <span
+                    class="metric-value"
+                    id="signalQuality">
+                    -
+                </span>
+
+            </div>
+
+
+            <div class="metric">
+
+                <span>Artifact Level</span>
+
+                <span
+                    class="metric-value"
+                    id="artifactLevel">
+                    -
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- EEG Bands -->
+
+        <div class="card">
+
+            <h2>EEG BAND POWER</h2>
+
+            <div class="metric">
+
+                <span>Alpha Power</span>
+
+                <span
+                    class="metric-value"
+                    id="alphaPower">
+                    -
+                </span>
+
+            </div>
+
+
+            <div class="metric">
+
+                <span>Beta Power</span>
+
+                <span
+                    class="metric-value"
+                    id="betaPower">
+                    -
+                </span>
+
+            </div>
+
+
+            <div class="metric">
+
+                <span>Theta Power</span>
+
+                <span
+                    class="metric-value"
+                    id="thetaPower">
+                    -
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- Activity -->
+
+        <div class="card">
+
+            <h2>ACTIVITY CONTEXT</h2>
+
+
+            <div class="metric">
+
+                <span>Activity</span>
+
+                <span
+                    class="metric-value"
+                    id="activity">
+                    -
+                </span>
+
+            </div>
+
+
+            <div class="metric">
+
+                <span>Scenario</span>
+
+                <span
+                    class="metric-value scenario"
+                    id="scenario">
+                    -
+                </span>
+
+            </div>
+
+
+            <div class="metric">
+
+                <span>Heart Rate</span>
+
+                <span
+                    class="metric-value"
+                    id="heartRate">
+                    -
+                </span>
+
+            </div>
+
+
+            <div class="metric">
+
+                <span>Speed</span>
+
+                <span
+                    class="metric-value"
+                    id="speed">
+                    -
+                </span>
+
+            </div>
+
+
+            <div class="metric">
+
+                <span>Effort</span>
+
+                <span
+                    class="metric-value"
+                    id="effort">
+                    -
+                </span>
+
+            </div>
+
+
+            <div class="metric">
+
+                <span>Fatigue</span>
+
+                <span
+                    class="metric-value"
+                    id="fatigue">
+                    -
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Fusion -->
+
+    <div class="state-card">
+
+        <h2>MULTIMODAL FUSION RESULT</h2>
+
+
+        <div
+            class="state"
+            id="state">
+
+            WAITING
+
+        </div>
+
+
+        <div
+            class="confidence"
+            id="confidence">
+
+            Confidence: -
+
+        </div>
+
+
+        <div
+            class="coaching"
+            id="coaching">
+
+            Waiting for backend data...
+
+        </div>
+
+
+        <ul
+            id="rationale">
+        </ul>
+
+
+    </div>
+
+
+</div>
+
+
+<script>
+
+
+const API_URL =
+    "/session/sample";
+
+
+async function fetchSample() {
+
+    try {
+
+        const response =
+            await fetch(API_URL);
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Backend request failed"
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        updateDashboard(data);
+
+
+        document
+            .getElementById(
+                "backendStatus"
+            )
+            .textContent =
+                "● ONLINE";
+
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+
+        document
+            .getElementById(
+                "backendStatus"
+            )
+            .textContent =
+                "● OFFLINE";
+
+    }
+
+}
+
+
+function updateDashboard(data) {
+
+
+    const eeg =
+        data.eeg;
+
+
+    const activity =
+        data.activity;
+
+
+    const state =
+        data.estimated_state;
+
+
+
+    document
+        .getElementById(
+            "samplingRate"
+        )
+        .textContent =
+            eeg.sampling_rate_hz + " Hz";
+
+
+    document
+        .getElementById(
+            "signalQuality"
+        )
+        .textContent =
+            Math.round(
+                eeg.signal_quality * 100
+            ) + "%";
+
+
+    document
+        .getElementById(
+            "artifactLevel"
+        )
+        .textContent =
+            Math.round(
+                eeg.artifact_level * 100
+            ) + "%";
+
+
+    document
+        .getElementById(
+            "alphaPower"
+        )
+        .textContent =
+            eeg.alpha_power
+                .toFixed(3);
+
+
+    document
+        .getElementById(
+            "betaPower"
+        )
+        .textContent =
+            eeg.beta_power
+                .toFixed(3);
+
+
+    document
+        .getElementById(
+            "thetaPower"
+        )
+        .textContent =
+            eeg.theta_power
+                .toFixed(3);
+
+
+
+    document
+        .getElementById(
+            "activity"
+        )
+        .textContent =
+            activity.activity;
+
+
+    document
+        .getElementById(
+            "scenario"
+        )
+        .textContent =
+            activity.scenario;
+
+
+    document
+        .getElementById(
+            "heartRate"
+        )
+        .textContent =
+            activity
+                .heart_rate_bpm
+                .toFixed(1)
+            + " BPM";
+
+
+    document
+        .getElementById(
+            "speed"
+        )
+        .textContent =
+            activity
+                .speed_kmh
+                .toFixed(2)
+            + " km/h";
+
+
+    document
+        .getElementById(
+            "effort"
+        )
+        .textContent =
+            Math.round(
+                activity.effort * 100
+            ) + "%";
+
+
+    document
+        .getElementById(
+            "fatigue"
+        )
+        .textContent =
+            Math.round(
+                activity.fatigue * 100
+            ) + "%";
+
+
+
+    document
+        .getElementById(
+            "state"
+        )
+        .textContent =
+            state.label;
+
+
+    document
+        .getElementById(
+            "confidence"
+        )
+        .textContent =
+            "Confidence: "
+            +
+            Math.round(
+                state.confidence * 100
+            )
+            + "%";
+
+
+    document
+        .getElementById(
+            "coaching"
+        )
+        .textContent =
+            state.coaching_message;
+
+
+
+    const rationaleList =
+        document
+            .getElementById(
+                "rationale"
+            );
+
+
+    rationaleList.innerHTML =
+        "";
+
+
+    state.rationale.forEach(
+        item => {
+
+            const li =
+                document
+                    .createElement(
+                        "li"
+                    );
+
+
+            li.textContent =
+                item;
+
+
+            rationaleList
+                .appendChild(
+                    li
+                );
+
+        }
+    );
+
+
+    drawWaveform(
+        eeg.filtered_waveform
+    );
+
+}
+
+
+function drawWaveform(samples) {
+
+
+    const canvas =
+        document
+            .getElementById(
+                "waveform"
+            );
+
+
+    const context =
+        canvas
+            .getContext(
+                "2d"
+            );
+
+
+    canvas.width =
+        canvas.clientWidth;
+
+
+    canvas.height =
+        canvas.clientHeight;
+
+
+
+    context.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+
+    if (
+        !samples
+        ||
+        samples.length === 0
+    ) {
+
+        return;
+
+    }
+
+
+    const width =
+        canvas.width;
+
+
+    const height =
+        canvas.height;
+
+
+    const max =
+        Math.max(
+            ...samples.map(
+                Math.abs
+            )
+        )
+        || 1;
+
+
+
+    context.beginPath();
+
+
+    samples.forEach(
+        (
+            value,
+            index
+        ) => {
+
+
+            const x =
+                (
+                    index
+                    /
+                    (
+                        samples.length - 1
+                    )
+                )
+                *
+                width;
+
+
+            const y =
+                height / 2
+                -
+                (
+                    value
+                    /
+                    max
+                )
+                *
+                (
+                    height * 0.4
+                );
+
+
+            if (
+                index === 0
+            ) {
+
+                context.moveTo(
+                    x,
+                    y
+                );
+
+            }
+
+            else {
+
+                context.lineTo(
+                    x,
+                    y
+                );
+
+            }
+
+        }
+    );
+
+
+    context.strokeStyle =
+        "#63d7ff";
+
+
+    context.lineWidth =
+        2;
+
+
+    context.stroke();
+
+}
+
+
+
+fetchSample();
+
+
+setInterval(
+    fetchSample,
+    1000
+);
+
+
+</script>
+
+
+</body>
+</html>

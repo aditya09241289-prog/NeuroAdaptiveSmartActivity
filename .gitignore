@@ -1,0 +1,36 @@
+# Python
+Backend/venv/
+Backend/__pycache__/
+Backend/**/__pycache__/
+*.pyc
+*.pyo
+
+# Python build outputs
+Backend/build/
+Backend/dist/
+*.spec
+
+# Unity
+Unity/Library/
+Unity/Temp/
+Unity/Obj/
+Unity/Build/
+Unity/Builds/
+Unity/Logs/
+Unity/UserSettings/
+Unity/.vs/
+Unity/*.csproj
+Unity/*.sln
+Unity/*.user
+Unity/*.userprefs
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment / secrets
+.env
